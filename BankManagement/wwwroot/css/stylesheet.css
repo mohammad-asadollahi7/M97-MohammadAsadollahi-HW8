@@ -21,10 +21,33 @@
     font-weight: 300;
 }
 
-
+@font-face{
+    font-family: yekan;
+    src: url(../fonts/Yekan.ttf);
+    font-weight: normal;
+}
 
 * {
     direction: rtl;
     font-size: 100%;
     font-family: Vazir;
+}
+
+.bg{
+    background-color: rgb(0, 255, 255);
+    min-width: 400px;
+    margin: 5rem 20rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+@media(max-width: 1200px){
+    .bg {
+        min-width: 400px;
+        max-width: 600px;
+        margin: 5rem auto;
+    }
+}
+
+.yekan-font{
+    font-family: yekan;
 }
