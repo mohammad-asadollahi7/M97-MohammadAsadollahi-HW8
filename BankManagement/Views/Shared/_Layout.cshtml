@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/stylesheet.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/bootstrap.min.css" />
+</head>
+<body>
+
+    <header class="d-flex align-items-center rounded-1 m-2 bg-info">
+        <div class=""><img src="~/icons/bank.png" /></div>
+        <div class="fw-bold fs-4">بانک مکتب شریف</div>
+    </header>
+
+    <main>
+        <div class="container mt-2">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="row border border-black justify-content-between align-items-center rounded-1 m-2">
+
+        <ul class="col-md-3 mb-3 mb-md-0 text-center text-md-end list-group list-group-flush ps-2 pe-4">
+            <li class="list-group-item fw-bold">تماس با ما</li>
+            <li class="list-group-item">شعبه مرکزی: تهران - خ آزادی</li>
+            <li class="list-group-item"> شماره تماس: 0211234567</li>
+            <li class="list-group-item">ساعات کاری شعب: 8 الی 13</li>
+        </ul>
+
+        <ul class="col-md-3 text-center text-md-end list-group list-group-flush pe-4 ps-2">
+            <li class="list-group-item fw-bold">لیست سپرده‌ها</li>
+            <li class="list-group-item">سپرده سرمایه گذاری یک‌ساله </li>
+            <li class="list-group-item">سپرده سرمایه گذاری کوتاه‌مدت </li>
+            <li class="list-group-item"> سایر سپرده‌ها  </li>
+        </ul>
+    </footer>
+
+
+
+
+    <script src="~/lib/jquery/jquery-3.6.1.min.js"></script>
+    <script src="~/lib/bootstrap/bootstrap.min.js"></script>
+    <script src="~/js/JavaScript.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
