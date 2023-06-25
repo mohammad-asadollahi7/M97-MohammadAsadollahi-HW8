@@ -1,3 +1,6 @@
+using BankManagement.Models;
+using BankManagement.Services;
+
 namespace BankManagement;
 
 public class Program
@@ -7,6 +10,9 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddControllersWithViews();
+        builder.Services.AddSingleton<IUserRepository, UserRepository>();
+        builder.Services.AddSingleton<IUserService, UserService>();
+
 
         var app = builder.Build();
 
@@ -20,7 +26,7 @@ public class Program
         app.UseAuthorization();
         app.MapControllerRoute(
             name: "default",
-            pattern: "{controller=home}/{action=login}/{id?}");
+            pattern: "{controller=home}/{action=index}/{id?}");
 
         app.Run();
     }

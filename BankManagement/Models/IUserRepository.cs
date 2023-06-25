@@ -2,6 +2,6 @@
 {
     public interface IUserRepository
     {
-        User GetUser(string NationalCode);
+        User Get(string NationalCode, string PhoneNumber);
     }
 }
