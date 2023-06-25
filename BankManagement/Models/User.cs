@@ -1,4 +1,4 @@
-﻿namespace BankManagement.Model
+﻿namespace BankManagement.Models
 {
     public class User
     {
