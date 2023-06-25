@@ -22,7 +22,7 @@ public class HomeController : Controller
         var isValid = _userService.IsValid(NationalCode, PhoneNumber);
         if(isValid)
         {
-            return RedirectToAction();
+            return RedirectToAction("Account");
         }
         else
         {
@@ -30,6 +30,11 @@ public class HomeController : Controller
             ViewBag.ErrorMessage="ورودی های نامعتبر";
             return View("index");
         }
+    }
+
+    public IActionResult Account()
+    {
+        return View();
     }
 
 

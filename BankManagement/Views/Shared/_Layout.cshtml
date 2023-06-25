@@ -9,9 +9,14 @@
 </head>
 <body>
 
-    <header class="d-flex align-items-center rounded-1 m-2 bg-info">
-        <div class=""><img src="~/icons/bank.png" /></div>
-        <div class="fw-bold fs-4">بانک مکتب شریف</div>
+    <header class="d-flex justify-content-between align-items-center rounded-1 m-2 bg-info">
+        <div class="d-flex align-items-center">
+            <div class=""><img src="~/icons/bank.png" /></div>
+            <div class="fw-bold fs-4">بانک مکتب شریف</div>
+        </div>
+         <div class="d-flex">
+            @RenderSection("header", required: false)
+        </div>
     </header>
 
     <main>
