@@ -22,7 +22,7 @@ public class HomeController : Controller
         var isValid = _userService.IsValid(NationalCode, PhoneNumber);
         if(isValid)
         {
-            return RedirectToAction("Account");
+            return RedirectToAction("Account", NationalCode);
         }
         else
         {
@@ -35,6 +35,13 @@ public class HomeController : Controller
     public IActionResult Account()
     {
         return View();
+    }
+
+    public IActionResult Turnover(string NationalCode)
+    {
+
+        return null;
+
     }
 
 
