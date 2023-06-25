@@ -1,11 +1,10 @@
-﻿
-
+﻿@model BankManagement.Models.User
 
 <div class="bg rounded-2">
-    <form class="mx-5 mb-5 d-flex flex-column gap-5 form-group text-center">
+    <form method="post" asp-controller="home" asp-action="login" class="mx-5 mb-5 d-flex flex-column gap-5 form-group text-center">
         <label class="yekan-font fw-bold fs-4">فرم ورود</label>
-        <input class="form-control" type="number" placeholder="نام کاربری"/>
-        <input class="form-control" type="number" placeholder="رمز عبور"/>
+        <input asp-for="NationalCode" class="form-control" type="number" placeholder="نام کاربری" />
+        <input asp-for="PhoneNumber" class="form-control" type="number" placeholder="رمز عبور"/>
         <input class="btn btn-dark" type="submit" value="ورود"/>
     </form>
 </div>
