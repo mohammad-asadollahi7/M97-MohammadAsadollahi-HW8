@@ -2,6 +2,7 @@ using BankManagement.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc;
 using BankManagement.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace BankManagement;
 
@@ -12,6 +13,16 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddControllersWithViews();
+
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddDistributedMemoryCache();
+        builder.Services.AddSession(Options =>
+        {
+            Options.IdleTimeout = TimeSpan.FromSeconds(10);
+            Options.Cookie.HttpOnly = true;
+            Options.Cookie.IsEssential = true;
+        });
+
         builder.Services.AddSingleton<IUserService, UserService>();
         builder.Services.AddSingleton<IUserRepository, UserRepository>();
 
@@ -26,6 +37,7 @@ public class Program
         app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthorization();
+        app.UseSession();
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=home}/{action=index}/{id?}");

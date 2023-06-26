@@ -3,16 +3,21 @@ using BankManagement.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Net.NetworkInformation;
 using System.Text.Json;
+
 
 namespace BankManagement.Controllers;
 
 public class HomeController : Controller
 {
+    private IHttpContextAccessor _context;
     private IUserService _userService;
 
-    public HomeController(IUserService userService)
+    public HomeController(IUserService userService, 
+                 IHttpContextAccessor context)
     {
+        _context = context;
         _userService = userService;
     }
     public IActionResult Index()
@@ -32,13 +37,13 @@ public class HomeController : Controller
 
         else
         {
-            return View("Account", NationalCode);
+            _context.HttpContext?.Session.SetString("NationalCode", NationalCode);
+            return RedirectToAction("Account");
         }
     }
 
     public IActionResult Account()
     {
-
         return View();
     }
 
@@ -55,4 +60,10 @@ public class HomeController : Controller
             return View(user);
         }
     }
+
+    //public IActionResult Transaction()
+    //{
+
+
+    //}
 }

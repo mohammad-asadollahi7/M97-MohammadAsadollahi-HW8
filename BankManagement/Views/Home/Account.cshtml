@@ -1,4 +1,4 @@
-﻿@model string
+﻿@inject IHttpContextAccessor context
 
 
 @section header{
@@ -16,7 +16,7 @@
                         <a class="nav-link" 
                         asp-controller="home" 
                         asp-action="turnover"
-                       asp-route-NationalCode="@Model">
+                        asp-route-NationalCode="@context.HttpContext?.Session.GetString("NationalCode")">
                         گردش حساب
                          </a>
                     </li>
