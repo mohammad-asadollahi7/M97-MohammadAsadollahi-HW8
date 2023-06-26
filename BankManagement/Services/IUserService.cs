@@ -1,7 +1,10 @@
-﻿namespace BankManagement.Services
+﻿using BankManagement.Models;
+
+namespace BankManagement.Services
 {
     public interface IUserService
     {
-        public bool IsValid(string NationalCode, string PhoneNumber);
+        public bool CheckUser(string NationalCode, string PhoneNumber);
+        User GetUser(string NationalCode);
     }
 }

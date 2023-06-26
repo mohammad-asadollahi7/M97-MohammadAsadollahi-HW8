@@ -1,4 +1,6 @@
 using BankManagement.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc;
 using BankManagement.Services;
 
 namespace BankManagement;
@@ -10,8 +12,8 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddControllersWithViews();
-        builder.Services.AddSingleton<IUserRepository, UserRepository>();
         builder.Services.AddSingleton<IUserService, UserService>();
+        builder.Services.AddSingleton<IUserRepository, UserRepository>();
 
 
         var app = builder.Build();

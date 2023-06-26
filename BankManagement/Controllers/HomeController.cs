@@ -2,6 +2,8 @@
 using BankManagement.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Text.Json;
 
 namespace BankManagement.Controllers;
 
@@ -15,34 +17,42 @@ public class HomeController : Controller
     }
     public IActionResult Index()
     {
-        return View(); 
+        return View();
     }
     public IActionResult Login(string NationalCode, string PhoneNumber)
     {
-        var isValid = _userService.IsValid(NationalCode, PhoneNumber);
-        if(isValid)
-        {
-            return RedirectToAction("Account", NationalCode);
-        }
-        else
+        var IsExist = _userService.CheckUser(NationalCode, PhoneNumber);
+
+        if (!IsExist)
         {
             ViewBag.ErrorImg = "/icons/error.png";
-            ViewBag.ErrorMessage="ورودی های نامعتبر";
+            ViewBag.ErrorMessage = "ورودی نامعتبر";
             return View("index");
+        }
+
+        else
+        {
+            return View("Account", NationalCode);
         }
     }
 
     public IActionResult Account()
     {
+
         return View();
     }
 
     public IActionResult Turnover(string NationalCode)
     {
-
-        return null;
-
+        var user = _userService.GetUser(NationalCode);
+        if (user.turnovers?.Count() == 0)
+        {
+            ViewBag.ErrorMessage = "عدم وجود گردش حساب";
+            return View("Account");
+        }
+        else
+        {
+            return View(user);
+        }
     }
-
-
 }

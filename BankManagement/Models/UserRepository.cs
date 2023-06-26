@@ -5,9 +5,10 @@ namespace BankManagement.Models;
 
 public class UserRepository : IUserRepository
 {
-    public User? Get(string NationalCode, string PhoneNumber)
+    public User? GetByNationalCode(string nationalCode)
     {
-        return DataBase.users.FirstOrDefault(u => u.NationalCode == NationalCode &&
-                                                u.PhoneNumber == PhoneNumber);
+        return DataBase.users.FirstOrDefault(u => u.NationalCode == nationalCode);
     }
+  
+    
 }

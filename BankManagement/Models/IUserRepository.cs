@@ -2,6 +2,6 @@
 {
     public interface IUserRepository
     {
-        User Get(string NationalCode, string PhoneNumber);
+        public User? GetByNationalCode(string nationalCode);
     }
 }

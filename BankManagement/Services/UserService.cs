@@ -1,26 +1,30 @@
 ﻿using BankManagement.Models;
 
-namespace BankManagement.Services
-{
-    public class UserService : IUserService
-    {
-        private IUserRepository _userRepository;
+namespace BankManagement.Services;
 
-        public UserService(IUserRepository userRepository)
+public class UserService : IUserService
+{
+    private IUserRepository _userRepository;
+
+    public UserService(IUserRepository userRepository)
+    {
+        _userRepository = userRepository;
+
+    }
+    public bool CheckUser(string NationalCode, string PhoneNumber)
+    {
+       var user = _userRepository.GetByNationalCode(NationalCode);
+        if (user == null || user.PhoneNumber != PhoneNumber)
         {
-            _userRepository = userRepository;
+            return false;
         }
-        public bool IsValid(string NationalCode, string PhoneNumber)
+        else
         {
-            var user = _userRepository.Get(NationalCode, PhoneNumber);
-            if (user == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return true;
         }
+    }
+    public User? GetUser(string NationalCode)
+    {
+      return _userRepository.GetByNationalCode(NationalCode);
     }
 }
