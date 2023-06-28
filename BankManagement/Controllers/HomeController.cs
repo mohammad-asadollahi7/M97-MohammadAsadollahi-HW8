@@ -47,8 +47,9 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Turnover(string NationalCode)
+    public IActionResult Turnover()
     {
+        var NationalCode = _context.HttpContext?.Session.GetString("NationalCode");
         var user = _userService.GetUser(NationalCode);
         if (user.turnovers?.Count() == 0)
         {
@@ -61,9 +62,26 @@ public class HomeController : Controller
         }
     }
 
-    //public IActionResult Transaction()
-    //{
+    public IActionResult PaymentForm()
+    {
+        return View();
+    }
 
+    public IActionResult Deposit(Turnover turnover, decimal price)
+    {
+        turnover.Credit = price;
+        var NationalCode = _context.HttpContext?.Session.GetString("NationalCode");
+        _userService.SetTurnover(NationalCode, turnover);
+        return RedirectToAction("Turnover"); 
+    }
 
-    //}
+    public IActionResult Payment(Turnover turnover, decimal price)
+    {
+        turnover.Debit = price;
+        var NationalCode = _context.HttpContext?.Session.GetString("NationalCode");
+        _userService.SetTurnover(NationalCode, turnover);
+        return RedirectToAction("Turnover");
+    }
 }
+
+

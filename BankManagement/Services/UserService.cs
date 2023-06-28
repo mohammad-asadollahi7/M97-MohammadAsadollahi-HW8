@@ -1,4 +1,5 @@
 ﻿using BankManagement.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace BankManagement.Services;
 
@@ -13,7 +14,7 @@ public class UserService : IUserService
     }
     public bool CheckUser(string NationalCode, string PhoneNumber)
     {
-       var user = _userRepository.GetByNationalCode(NationalCode);
+        var user = _userRepository.GetByNationalCode(NationalCode);
         if (user == null || user.PhoneNumber != PhoneNumber)
         {
             return false;
@@ -25,6 +26,24 @@ public class UserService : IUserService
     }
     public User? GetUser(string NationalCode)
     {
-      return _userRepository.GetByNationalCode(NationalCode);
+        return _userRepository.GetByNationalCode(NationalCode);
+    }
+
+    public void SetTurnover(string NationalCode, Turnover turnover)
+    {
+        var user = _userRepository.GetByNationalCode(NationalCode);
+        var lastId = user.turnovers.Count();
+        turnover.Id = lastId + 1;
+        turnover.TransactionDate = DateTime.Now;
+        if (turnover.Debit == null)
+        {
+            turnover.Balance = user.turnovers[lastId - 1].Balance + turnover.Credit;
+        }
+        else
+        {
+            turnover.Balance = user.turnovers[lastId - 1].Balance - turnover.Debit;
+        }
+        _userRepository.AddTurnover(user, turnover);
+
     }
 }

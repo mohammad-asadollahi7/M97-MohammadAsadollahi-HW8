@@ -1,0 +1,26 @@
+﻿@model BankManagement.Models.Turnover
+@inject IHttpContextAccessor context
+@{
+    var NationalCode = context.HttpContext?.Session.GetString("NationalCode");
+}
+
+@section header
+    {
+    <a class="btn ms-3" asp-controller="home"
+        asp-action="account"
+         type="submit">
+        <img src="~/icons/arrow.png" />
+    </a>
+}
+
+
+<form class="form-group d-flex gap-2 flex-column justify-content-center m-5">
+    
+    <input class="form-control" asp-for="@Model.Description" type="text" placeholder="توضیحات تراکنش" />
+    <input class="form-control" type="number" name="price" min="0" placeholder="مبلغ" />
+    <div class="text-center">
+        <button asp-action="Deposit" type="submit" class="btn btn-success">واریز</button>
+        <button asp-action="Payment" type="submit" class="btn btn-danger">برداشت</button>
+    </div>
+    
+</form>

@@ -6,5 +6,7 @@ namespace BankManagement.Services
     {
         public bool CheckUser(string NationalCode, string PhoneNumber);
         User GetUser(string NationalCode);
+        public void SetTurnover(string NationalCode, Turnover turnover);
     }
+
 }
