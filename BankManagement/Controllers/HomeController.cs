@@ -62,7 +62,7 @@ public class HomeController : Controller
         }
     }
 
-    public IActionResult PaymentForm()
+    public IActionResult TransactionForm()
     {
         return View();
     }

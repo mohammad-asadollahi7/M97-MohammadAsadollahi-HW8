@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc;
 using BankManagement.Services;
 using Microsoft.AspNetCore.Http;
+using BankManagement.Middlewares;
 
 namespace BankManagement;
 
@@ -22,7 +23,7 @@ public class Program
             Options.Cookie.HttpOnly = true;
             Options.Cookie.IsEssential = true;
         });
-
+        builder.Services.AddSingleton<Log>();
         builder.Services.AddSingleton<IUserService, UserService>();
         builder.Services.AddSingleton<IUserRepository, UserRepository>();
 
@@ -35,6 +36,9 @@ public class Program
             app.UseExceptionHandler("/Home/Error");
         }
         app.UseStaticFiles();
+
+        app.UseLogger();
+
         app.UseRouting();
         app.UseAuthorization();
         app.UseSession();
@@ -45,3 +49,4 @@ public class Program
         app.Run();
     }
 }
+
